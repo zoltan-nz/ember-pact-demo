@@ -45,7 +45,7 @@ const interaction = {
     method: 'GET',
     path: '/api/dogs',
     headers: {
-      'Accept': 'application/json, text/javascript, */*; q=0.01'
+      'Accept': 'application/json'
       ,
     },
   },

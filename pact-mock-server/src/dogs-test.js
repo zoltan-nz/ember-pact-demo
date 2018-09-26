@@ -17,12 +17,21 @@ describe('The Dog API', () => {
     pactfileWriteMode: 'merge',
   });
 
-  const EXPECTED_BODY = [
+  const PAYLOAD_BODY = [
     {
       dog: 1,
     },
     {
       dog: 2,
+    },
+  ];
+
+  const EXPECTED_BODY = [
+    {
+      dog: 3,
+    },
+    {
+      dog: 4,
     },
   ];
 
@@ -47,7 +56,7 @@ describe('The Dog API', () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: EXPECTED_BODY,
+          body: PAYLOAD_BODY,
         },
       };
       provider.addInteraction(interaction).then(() => {
@@ -63,9 +72,12 @@ describe('The Dog API', () => {
       };
       getMeDogs(urlAndPort)
         .then(response => {
+          debugger;
           expect(response.data).to.eql(EXPECTED_BODY);
           done();
-        }, done);
+        }, done)
+        .catch(e => { console.log(e); done() })
+      ;
     });
 
     // verify with Pact, and reset expectations
